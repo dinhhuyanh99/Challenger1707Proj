@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row" ng-controller="playlistInDetail">
+    <div class="col s12 m4 l4 xl4">
+      <div class="playlistInfo">
+        <div class="playlistThumbnail z-depth-2 center-align">
+          <img class="responsive-img" ng-src="{{playlistToShow.attributes.thumbnailUrl}}" alt="{{playlistToShow.attributes.name}}">
+        </div>
+        <div class="card-panel white z-depth-2">
+          <h5 class="truncate">{{playlistToShow.attributes.name}}</h5>
+          <span><h6>Created on:</h6>{{createdTime}}</span>
+          <p class="playlistDescription black-text truncate">{{playlistToShow.attributes.description}}</p>
+          <div class="divider"></div>
+          <div class="playlistDetailAction">
+            <!--<a class="waves-effect waves-dark waves-ripple tooltipped" data-position="top" data-delay="50" data-tooltip="Play all"><i class="material-icons black-text">playlist_play</i></a>-->
+            <a class="waves-effect waves-dark waves-ripple tooltipped" data-position="top" data-delay="50" data-tooltip="Add to playlist..."><i class="material-icons black-text">playlist_add</i></a>
+            <a class="waves-effect waves-dark waves-ripple tooltipped" data-position="top" data-delay="50" data-tooltip="Delete" ng-click="deleteConfirmation = true;"><i class="material-icons black-text" ng-hide="deleteConfirmation">delete</i><i class="material-icons red-text" ng-show="deleteConfirmation">delete</i></a>
+          </div>
+          <div ng-show="deleteConfirmation">
+            <div class="divider"></div>
+            <div>
+              <h5> Delete playlist?</h5>
+              <span>Do you really want to delete this playlist?</span>
+              <a class="btn red white-text waves-effect waves-light waves-ripple" ng-click="deletePlaylist(playlistToShow.id)">Okay</a>
+              <a class="btn-flat waves-effect waves-dark waves-ripple" ng-click="deleteConfirmation = false">Cancel</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m8 l8 xl8">
+      <ul class="collapsible" data-collapsible="expandable" style="border-radius: 2px;">
+        <li ng-repeat="videos in playlistDetailVideos" class="waves-ripple waves-dark waves-block" id="{{videos.id}}">
+          <div class="collapsible-header">
+            <a class="waves-effect waves-light waves-ripple" href="#!watch?cid={{videos.id}}&inplaylist={{playlistToShow.id}}"><img ng-src="{{videos.attributes.thumbnail}}"  width="168" height="94" alt="{{videos.attributes.updatedTimeMLS}}"></a>
+            <p><span class="videoPlaylistTitle"><a href="#!watch?cid={{videos.id}}&inplaylist={{playlistToShow.id}}" class="black-text">{{videos.attributes.name}}</a></span><span class="videoPlaylistAuthor grey-text darken-2">{{videos.attributes.createdBy}}</span><span class="videoPlaylistAuthor"><i class="material-icons black-text waves-effect waves-dark waves-ripple" ng-click="expandVideoPlaylist = !expandVideoPlaylist" ng-show="expandVideoPlaylist">expand_less</i><i class="material-icons black-text waves-effect waves-dark waves-ripple" ng-click="expandVideoPlaylist = !expandVideoPlaylist" ng-hide="expandVideoPlaylist">expand_more</i></span></p>
+          </div>
+          <div class="collapsible-body">
+            <div class="videoInPlaylistAction">
+              <a class="waves-effect waves-dark waves-ripple"><i class="material-icons black-text center">play_arrow</i></a>
+              <a class="waves-effect waves-dark waves-ripple"><i class="material-icons black-text center">mode_edit</i></a>
+              <a class="waves-effect waves-dark waves-ripple"><i class="material-icons black-text center">delete</i></a>
+            </div>
+            <p class="videoInPlaylistDescription">{{videos.attributes.description}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('.collapsible').collapsible();
+    $('.tooltipped').tooltip({delay: 50});
+</script>

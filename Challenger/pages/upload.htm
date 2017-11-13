@@ -1,0 +1,85 @@
+<div class="container uploadVideoForm z-depth-1">
+	<div class="row">
+		<div class="col s12" ng-controller="uploadVideo">
+			<form name="addPersonalVideo">
+				<div class="row">
+					<div class="col s12 m6 l6 xl8">
+						<h5>Video Details <a class="circle waves-effect waves-ripple waves-dark center"><i class="small material-icons black-text center circle">help_outline</i></a><a class="btn-flat waves-effect waves-green waves-ripple" ng-show="showPreviewVideo" ng-click="autoFill()">Auto-complete</a></h5>
+						<div class="input-field col s12">
+							<input id="idvideo" type="text"
+								   placeholder="Video ID contains at least 10 characters"
+								   ng-model="videoData.data.attributes.youtubeId"
+								   ng-pattern="/^[a-zA-Z0-9_-]+$/"
+								   ng-keyup="checkAndPreviewID()"
+								   required>
+							<label for="idvideo" id="labelVideoId" class="active">Video ID</label>
+						</div>
+						<!--<div class="input-field col 12">-->
+						<!--<div class="btn" ng-switch on="existedId">-->
+						<!--<span ng-switch-when="false"-->
+						<!--ng-click="validateVideoIDWithAPI()">Validate ID</span>-->
+
+						<!--<span ng-switch-when="true" ng-click="autoComplete">Auto Complete</span>-->
+						<!--</div>-->
+						<!--</div>-->
+						<div class="input-field col s12">
+							<input id="namevideo" placeholder="Video Name contains between 3-50 characters" type="text" ng-model="videoData.data.attributes.name" ng-minlength="3" ng-maxlength="50" required>
+							<label for="namevideo" id="labelVideoName" class="active">Video Name</label>
+						</div>
+						<div class="input-field col s12">
+							<textarea id="descvideo" placeholder="Video Description contains at least 1 character" class="materialize-textarea" ng-model="videoData.data.attributes.description" ng-minlength="1" required></textarea>
+							<label for="descvideo" id="labelVideoDesc" class="active">Description</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="text" id="thumbnailYT" placeholder="You can choose a custom thumbnail" ng-model="videoData.data.attributes.thumbnail" required>
+							<label for="thumbnailYT" class="active">Thumbnail</label>
+						</div>
+						<div class="input-field col s12">
+							<input id="keywords" placeholder="Video Keywords contain at least 1 keyword" type="text" ng-model="videoData.data.attributes.keywords" required>
+							<label for="keywords" class="active">Keywords</label>
+						</div>
+						<div class="input-field col s12">
+							<select class="icons" ng-model="videoData.data.attributes.playlistId" material-select watch>
+								<option value="" disabled selected>Choose a playlist</option>
+								<option value="0">Your videos</option>
+								<option class="left circle" ng-repeat="playlistToAddTo in playlistToAddOptions" data-icon="{{playlistToAddTo.attributes.thumbnailUrl}}" value="{{playlistToAddTo.id}}">{{playlistToAddTo.attributes.name}}</option>
+							</select>
+							<label>Playlist</label>
+						</div>
+					</div>
+
+					<div class="col s12 m6 l6 xl4">
+						<h5>Preview</h5>
+						<div class="preview-video z-depth-2" ng-show="showPreviewVideo">
+							<div class="thumbnail-preview center">
+								<img class="responsive-img" src="{{previewVideoCard.snippet.thumbnails.high.url}}" alt="{{previewVideoCard.snippet.title}}">
+							</div>
+							<div class="preview-info center">
+								<span class="preview-video-content">{{previewVideoCard.snippet.title}}</span>
+								<span class="preview-video-author">{{previewVideoCard.snippet.channelTitle}}</span>
+							</div>
+						</div>
+						<div class="preview-video z-depth-2" ng-hide="showPreviewVideo">
+							<div class="thumbnail-preview-error center">
+								<img class="responsive-img" src="https://i.stack.imgur.com/bJ120.png" alt="error">
+							</div>
+							<div class="preview-info center">
+								<span class="preview-video-content">Oops!</span>
+								<span class="preview-video-author" ng-hide="enoughCharID">It seems that you haven't type anything!</span>
+								<span class="preview-video-author" ng-show="enoughCharID" ng-hide="invalidId">Make sure you have at least 10 characters!</span>
+								<span class="preview-video-author" ng-show="invalidId">Wrong ID??</span>
+							</div>
+						</div>
+					</div>
+					<div class="col s12">
+						<a ng-disabled="addPersonalVideo.$invalid" ng-click="submitVideo()" class="btn green white-text waves-effect waves-light waves-ripple"><i class="material-icons right">send</i>Submit</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	$('select').material_select();
+</script>

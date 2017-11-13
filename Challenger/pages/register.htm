@@ -1,0 +1,61 @@
+<section class="register-full">
+	<script>
+		$('#gender').material_select();
+	</script>
+	<div class="container z-depth-5">
+		<div class="row">
+			<div class="col s12 m6 l6 xl6 red darken-1" id="left-column">
+				<h3 class="white-text center"><i class="small material-icons">subscriptions</i>Challenger</h3>
+				<i id="quotes" class="white-text right">"Never fear another challenger, no matter how large; Never despise another challenger, no matter how small."</i>
+				<h5 class="white-text right">-Morihei Ueshiba-</h5>
+				<p id="paragraph1" class="white-text right">Here at Challenger, we dedicated to make the best alternate video website based on YouTube API. We will greatly appreciate if you register and help us on the journey.</p>
+				<span id="callout" class="white-text right">Register<i class="small material-icons">arrow_forward</i></span>
+			</div>
+			<div class="col s12 m6 l6 xl6 white" id="right-column">
+				<div class="row">
+					<form class="col s12" id="register-form" ng-controller="registerForm">
+						<div class="input-field col s12">
+							<input type="text" id="user-name" ng-model="registerData.data.attributes.username">
+							<label for="user-name">Username</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="text" id="full-name" ng-model="registerData.data.attributes.fullName">
+							<label for="full-name">Full Name</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="email" id="email-reg" class="validate" ng-model="registerData.data.attributes.email">
+							<label for="email-reg" data-error="Please enter another email" data-success="Okay you are done!">Email</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="password" id="password-reg" class="validate" ng-model="registerData.data.attributes.password">
+							<label for="password-reg" data-error="Please enter another password" data-success="Good to go!">Password</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="password" id="re-password-reg" class="validate">
+							<label for="re-password-reg" data-error="Please re-enter the password" data-success="Good to go!">Re-enter Password</label>
+						</div>
+						<div class="input-field col s12">
+							<input class="active" type="text" id="dob-reg" placeholder="DD/MM/YYYY" ng-model="registerData.data.attributes.birthDay">
+							<label for="dob-reg">Birthday</label>
+						</div>
+						<div class="input-field col s12">
+							<select id="gender" ng-model="registerData.data.attributes.gender">
+								<option value="" disabled selected>Choose your gender</option>
+								<option value="1">Male</option>
+								<option value="0">Female</option>
+							</select>
+							<label for="gender">Gender</label>
+						</div>
+						<div class="input-field col s12">
+							<label for="avatar" class="active">Avatar</label>
+							<input type="text" name="avatar" id="avatar" placeholder="Copy a link of the desire avatar image">
+						</div>
+						<div class="right">
+							<a class="btn red darken-1 white-text waves-effect waves-light waves-ripple" href="#" ng-click="handleRegister()">Register</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

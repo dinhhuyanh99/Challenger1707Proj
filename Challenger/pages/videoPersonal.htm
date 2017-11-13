@@ -1,0 +1,190 @@
+<div class="container-video-page" ng-controller="videoPersonalContent">
+	<div class="row">
+		<div ng-show="loadingPersonal" class="container center-align offsetVert20">
+			<div class="preloader-wrapper active center-align">
+				<div class="spinner-layer spinner-blue center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+
+				<div class="spinner-layer spinner-red center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+
+				<div class="spinner-layer spinner-green center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="col s12 m12 l8 xl8" id="video-player">
+			<div class="video-container z-depth-1">
+				<div ng-show="loadingPersonal" class="container center-align offsetVert20">
+					<div class="preloader-wrapper active center-align">
+						<div class="spinner-layer spinner-blue center-align">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+							<div class="circle"></div>
+						</div><div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+						</div>
+
+						<div class="spinner-layer spinner-red center-align">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+							<div class="circle"></div>
+						</div><div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+						</div>
+
+						<div class="spinner-layer spinner-yellow center-align">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+							<div class="circle"></div>
+						</div><div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+						</div>
+
+						<div class="spinner-layer spinner-green center-align">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+							<div class="circle"></div>
+						</div><div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<iframe ng-src="{{embededCID}}" frameborder="0" gesture="media" allowfullscreen></iframe>
+			</div>
+			<div class="video-info z-depth-1">
+				<span class="title-video">{{watchingPersonalVideo.attributes.name}}</span>
+				<p class="view-count">Personally Added Video</p>
+				<div class="info-container">
+					<a href="#" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Like"><i class="material-icons black-text">thumb_up</i> {{watchingVideo.statistics.likeCount}}</a>
+					<a href="#" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Dislike"><i class="material-icons black-text">thumb_down</i> {{watchingVideo.statistics.dislikeCount}}</a>
+					<a href="#" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Share"><i class="material-icons black-text">share</i></a>
+					<a href="#add-to-playlist" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text modal-trigger" data-position="top" data-delay="50" data-tooltip="Add to playlist"><i class="material-icons black-text">playlist_add</i></a>
+					<a class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Show more"><i class="material-icons black-text" ng-click="showHideDescription = !showHideDescription" ng-show="showHideDescription">arrow_drop_up</i><i class="material-icons black-text" ng-click="showHideDescription = !showHideDescription" ng-hide="showHideDescription">arrow_drop_down</i></a>
+				</div>
+
+				<div class="video-description" ng-show="showHideDescription">
+					<div class="divider info-divider"></div>
+					<!--<div class="channel-info">-->
+						<!--<span class="waves-effect waves-light waves-ripple channel-thumbnail"><a><img width="80" src="{{channelDetails.snippet.thumbnails.high.url}}" alt="{{channelDetails.snippet.title}}"></a></span>-->
+						<!--<span><h5>{{channelDetails.snippet.title}}</h5></span>-->
+						<!--<span><b>{{channelDetails.statistics.subscriberCount}}</b> Subscribers</span>-->
+						<!--<br>-->
+						<!--<span>Posted on {{timeStamp}}</span>-->
+					<!--</div>-->
+					<p class="truncate" style="white-space: pre-line;">{{watchingPersonalVideo.attributes.description}}</p>
+					<div class="more-info">
+						<p><h6>Keywords</h6><span>{{watchingPersonalVideo.attributes.keywords}}</span></p>
+					</div>
+				</div>
+			</div>
+			<div id="add-to-playlist" class="modal bottom-sheet">
+				<div class="modal-content">
+					<h4>Add to playlist</h4>
+					<ul class="collection">
+						<li class="collection-item avatar" ng-repeat="addToPlaylistSelection in listOfPlaylists">
+							<img ng-src="{{addToPlaylistSelection.attributes.thumbnailUrl}}" alt="{{addToPlaylistSelection.attributes.name}}" class="circle">
+							<span class="title truncate">{{addToPlaylistSelection.attributes.name}}</span>
+							<p class="truncate">{{addToPlaylistSelection.attributes.createdTimeMLS}}</p>
+							<a class="modal-close waves-effect waves-dark btn-flat" ng-click="addToPlaylist(addToPlaylistSelection.id);">Add<i class="material-icons left">playlist_add</i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col s12 m12 l4 xl4">
+			<div class="col s12 z-depth-1 playlistQueue" ng-show="playPlaylistVideo">
+				<div class="playlistRenderer">
+					<div class="playlistQueueHeader">
+						<div class="playlistQueueHeader-contents">
+							<h5 class="truncate">{{playlistQueueInfo.attributes.name}}</h5>
+							<div class="playlistAuthor"><span>Created on {{createdTime}}</span></div>
+							<!--<div class="playlistActions">-->
+								<!--<a class="waves-effect waves-dark waves-ripple"><i class="material-icons black-text">add</i></a>-->
+								<!--<a class="waves-effect waves-dark waves-ripple"><i class="material-icons black-text">add</i></a>-->
+								<!--<a class="waves-effect waves-dark waves-ripple"><i class="material-icons black-text">add</i></a>-->
+							<!--</div>-->
+						</div>
+					</div>
+					<ul class="collection playlistQueueContents">
+						<li ng-repeat="showVideoQueue in playlistQueueVideo" ng-mouseover="showPlay = true" ng-mouseleave="showPlay = false" class="collection-item avatar" >
+							<img ng-src="{{showVideoQueue.attributes.thumbnail}}" alt="{{showVideoQueue.id}}" class="circle" ng-mouseover="showPlay = true">
+							<a href="#!watch?cid={{showVideoQueue.id}}&inplaylist={{playlistID}}"><i class="material-icons circle opaque-1" ng-show="showPlay" ng-mouseleave="showPlay = false">play_arrow</i></a>
+							<span class="title truncate"><a href="#!watch?cid={{showVideoQueue.id}}&inplaylist={{playlistID}}" id="videosaaa{{showVideoQueue.id}}">{{showVideoQueue.attributes.name}}</a></span>
+							<p class="grey-text darken-2">{{author}}</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col s12">
+				<div class="video-suggestions z-depth-1 hoverable">
+					<div class="video-content waves-effect waves-dark waves-ripple">
+						<a class="thumbnail-video" href="#!play?id={{suggestions.id.videoId}}">
+							<img ng-src="{{suggestions.snippet.thumbnails.high.url}}" alt="thumbnails">
+						</a>
+						<a href="#!play?id={{suggestions.id.videoId}}">
+							<span class="title-video-content black-text">{{suggestions.snippet.title}}</span>
+							<span class="title-video-author grey-text lighten-1">{{suggestions.snippet.channelTitle}}</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$('#add-to-playlist').modal();
+</script>
+
+
+
+ <!--  <div class="card horizontal fixed-size-card waves-effect waves-block waves-dark">
+					<div class="card-image">
+						<a class="waves-effect waves-block waves-light" href="#"><img src="https://i.ytimg.com/vi/OLux-Q8Uano/hqdefault.jpg?sqp=-oaymwEWCNIBEHZIWvKriqkDCQgBFQAAiEIYAQ==&rs=AOn4CLBaqn03KXh727N-kQpDu2czLCCeQg"></a>
+					</div>
+					<div class="card-content">
+						<a href="#" onclick="alert('Working');"><p class="card-title-small black-text">CardTitle123456789123</p></a>
+					</div>
+				</div>
+ -->

@@ -1,0 +1,30 @@
+<div class="container uploadVideoForm z-depth-1">
+    <div class="row">
+        <div class="col s12" ng-controller="createPlaylist">
+            <form name="form">
+                <div class="row">
+                    <div class="col s12 m12 l12 xl12">
+                        <h5>Playlist details <a class="circle waves-effect waves-ripple waves-dark center"><i class="small material-icons black-text center circle">help_outline</i></a></h5>
+                        <div class="input-field col s12">
+                            <input id="playlistName" type="text"
+                                   placeholder="Playlist Name contains at least 1 character"
+                                   ng-model="playlistData.data.attributes.name"
+                                   ng-pattern="/^[a-zA-z0-9_-]+$/"
+                                   required>
+                            <label for="playlistName" class="active">Playlist Name</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="playlistDesc" placeholder="Playlist Description contains at least 1 character" class="materialize-textarea" ng-model="playlistData.data.attributes.description" required></textarea>
+                            <label for="playlistDesc" class="active">Playlist Description</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="thumbnailLink" placeholder="Thumbnail link must be a valid image" type="text" ng-model="playlistData.data.attributes.thumbnailUrl" required>
+                            <label for="thumbnailLink" class="active">Thumbnail Link</label>
+                        </div>
+                        <a ng-click="addPlaylist()" class="btn green waves-effect waves-light waves-ripple right">Add Playlist <i class="material-icons left">playlist_add</i></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

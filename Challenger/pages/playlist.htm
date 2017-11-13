@@ -1,0 +1,80 @@
+<div class="container" ng-controller="listingPlaylist">
+  <div class="row">
+    <div>
+      <h6>Playlists</h6>
+      <div class="right-align">
+        <a href="#!playlist/createPlaylist"class="btn-flat waves-effect waves-dark waves-ripple"><i class="material-icons left">add</i>New playlist</a>
+        <!--<a id="dropdownSorting" class="btn-flat waves-effect waves-dark waves-ripple" data-activates="sortingOptions">Sort by <i class="material-icons right">arrow_drop_down</i></a>-->
+        <!--&lt;!&ndash;<ul id="sortingOptions" class="dropdown-content">&ndash;&gt;-->
+          <!--&lt;!&ndash;<li><a class="black-text">Date created (oldest)</a></li>&ndash;&gt;-->
+          <!--&lt;!&ndash;<li><a class="black-text">Date created (newest)</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div ng-show="loadingPage" class="container center-align offsetVert20">
+      <div class="preloader-wrapper active center-align">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="listPlaylist">
+      <div class="row">
+        <div class="col s12 m6 l4 xl3" ng-repeat="playlistView in listOfPlaylists" id="{{playlistView.id}}">
+          <div class="card small hoverable sticky-action">
+            <div class="card-image waves-effect waves-block waves-light">
+              <a href="#!playlist/playlistDetail?id={{playlistView.id}}"><img class="responsive-img" ng-src="{{playlistView.attributes.thumbnailUrl}}" alt="{{playlistView.attributes.name}}"></a>
+            </div>
+            <div class="card-content waves-effect waves-block waves-ripple">
+              <span class="card-title activator grey-text text-darken-4 truncate" ng-click="minorDetails(playlistView.id);">{{playlistView.attributes.name}}</span>
+            </div>
+            <div class="card-reveal">
+              <div ng-hide="confirmationDelete">
+                <span class="card-title grey-text text-darken-4 truncate">{{playlistView.attributes.name}}<i class="material-icons right waves-effect waves-dark waves-ripple">close</i></span>
+                <p class="minor-detail-playlist-truncation" style="white-space: pre-line;">{{playlistView.attributes.description}}</p>
+                <a href="#!playlist/playlistDetail?id={{playlistView.id}}" class="btn-flat waves-effect waves-dark waves-ripple black-text">Details</a>
+              </div>
+              <div ng-show="confirmationDelete">
+                <span class="card-title grey-text text-darken-4 truncate">Delete {{playlistView.attributes.name}} ?<i class="material-icons right waves-effect waves-dark waves-ripple" ng-click="noDelete();">close</i></span>
+                <p class="minor-detail-playlist-truncation" style="white-space: pre-line;">Are you sure you want to delete this playlist? Click 'Delete' again to delete if you wish so, or you can click the button in the corner to cancel.</p>
+              </div>
+            </div>
+            <div class="card-action">
+              <a href="#!watch?cid=&playlist={{playlistView.id}}">Play</a>
+              <a ng-click="deletePlaylist(playlistView.id); count = count + 1; confirmedDelete(count)" ng-init="count = 0" id="delete{{playlistView.id}}" class="" ng-mouseleave="count = 0">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--<div class="center-align">-->
+      <!--<img class="z-depth-1" src="https://i.stack.imgur.com/bJ120.png" alt="error">-->
+      <!--<h4>Oops, you have no playlists yet, create one?</h4>-->
+      <!--<a class="btn green waves-effect waves-light waves-ripple"><i class="material-icons left">add</i>Add playlist</a>-->
+    <!--</div>-->
+
+  </div>
+</div>
+
+<script>
+//    $('#dropdownSorting').dropdown({
+//        inDuration: 300,
+//        outDuration: 225,
+//        constrainWidth: false,
+//        hover: false,
+//        gutter: 0,
+//        belowOrigin: true,
+//        alignment: 'right',
+//        stopPropagation: false
+//    });
+</script>

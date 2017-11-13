@@ -1,0 +1,109 @@
+<div class="container-video-page" ng-controller="videoContent">
+	<div class="row">
+		<div ng-show="loadingPage" class="container center-align offsetVert20">
+			<div class="preloader-wrapper active center-align">
+				<div class="spinner-layer spinner-blue-only">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="col s12 m12 l8 xl8" id="video-player">
+			<div class="video-container z-depth-1">
+				<iframe src="{{embededId}}" frameborder="0" gesture="media" allowfullscreen id="existed-iframe-player"></iframe>
+			</div>
+			<div class="video-info z-depth-1">
+				<span class="title-video">{{watchingVideo.snippet.title}}</span>
+				<p class="view-count">{{watchingVideo.statistics.viewCount}} views</p>
+				<div class="channel-info">
+					<span class="waves-effect waves-light waves-ripple channel-thumbnail"><a><img class="circle" width="32" src="{{channelDetails.snippet.thumbnails.high.url}}" alt="{{channelDetails.snippet.title}}"></a></span>
+					<span><h6>{{channelDetails.snippet.title}}</h6></span>
+					<span><b>{{channelDetails.statistics.subscriberCount}}</b> Subscribers</span>
+				</div>
+		<div class="info-container">
+			<a href="#" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Like"><i class="material-icons black-text">thumb_up</i> {{watchingVideo.statistics.likeCount}}</a>
+			<a href="#" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Dislike"><i class="material-icons black-text">thumb_down</i> {{watchingVideo.statistics.dislikeCount}}</a>
+			<a href="#" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Share"><i class="material-icons black-text">share</i></a>
+			<!--<a href="#" class="tooltipped action-btn center waves-effect waves-dark waves-ripple black-text" data-position="top" data-delay="50" data-tooltip="Add to playlist"><i class="material-icons black-text">playlist_add</i></a>-->
+			<i class="material-icons black-text" ng-click="showHideDescription = !showHideDescription" ng-show="showHideDescription">arrow_drop_up</i><i class="material-icons black-text" ng-click="showHideDescription = !showHideDescription" ng-hide="showHideDescription">arrow_drop_down</i>
+				</div>
+				<div class="video-description" ng-show="showHideDescription">
+					<div class="divider info-divider"></div>
+					<p class="truncate" style="white-space: pre-line;">{{watchingVideo.snippet.description}}</p>
+					<div class="more-info">
+						<p><h6>Posted on</h6>{{timeStamp}}</p>
+						<p><h6>Tags</h6><span ng-repeat="tag in tagsForVideo">{{tag}}, </span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col s12 m12 l4 xl4" ng-repeat="suggestions in suggestedToWatch | limitTo:7:1">
+			<div class="video-suggestions z-depth-1 hoverable">
+				<div class="video-content waves-effect waves-dark waves-ripple">
+					<a class="thumbnail-video" href="#!play?id={{suggestions.id.videoId}}">
+						<img src="{{suggestions.snippet.thumbnails.high.url}}" alt="thumbnails">
+					</a>
+					<a href="#!play?id={{suggestions.id.videoId}}">
+						<span class="title-video-content black-text">{{suggestions.snippet.title}}</span>
+						<span class="title-video-author grey-text lighten-1">{{suggestions.snippet.channelTitle}}</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    var tag = document.createElement('script');
+    tag.id = 'iframe-demo';
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('existed-iframe-player', {
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+    function onPlayerReady(event) {
+        alert('Ready to play!');
+    }
+    function iframeStatus(playerStatus) {
+        if (playerStatus == -1) {
+            alert('Unstarted!'); // unstarted
+        } else if (playerStatus == 0) {
+            alert('Ended!'); // ended
+        } else if (playerStatus == 1) {
+            alert('playing!'); // playing
+        } else if (playerStatus == 2) {
+            alert('paused!'); // paused
+        } else if (playerStatus == 3) {
+            alert('buffering'); // buffering
+        } else if (playerStatus == 5) {
+            alert('video cued'); // video cued
+        }
+    }
+    function onPlayerStateChange(event) {
+        iframeStatus(event.data);
+    }
+</script>
+ <!--  <div class="card horizontal fixed-size-card waves-effect waves-block waves-dark">
+					<div class="card-image">
+						<a class="waves-effect waves-block waves-light" href="#"><img src="https://i.ytimg.com/vi/OLux-Q8Uano/hqdefault.jpg?sqp=-oaymwEWCNIBEHZIWvKriqkDCQgBFQAAiEIYAQ==&rs=AOn4CLBaqn03KXh727N-kQpDu2czLCCeQg"></a>
+					</div>
+					<div class="card-content">
+						<a href="#" onclick="alert('Working');"><p class="card-title-small black-text">CardTitle123456789123</p></a>
+					</div>
+				</div>
+ -->

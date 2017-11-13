@@ -1,0 +1,132 @@
+<div class="container">
+    <ul id="video-options" class="dropdown-content">
+      <li><a href="#" class="waves-effect waves-dark waves-ripple black-text">Not Interested</a></li>
+       <li><a href="#" class="waves-effect waves-dark waves-ripple black-text">Add to Favorite</a></li>
+    </ul>
+	<div class="row" ng-controller="listVideosPersonal">
+		<div ng-show="loadingPersonal" class="container center-align offsetVert20">
+			<div class="preloader-wrapper active center-align">
+				<div class="spinner-layer spinner-blue center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+
+				<div class="spinner-layer spinner-red center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+
+				<div class="spinner-layer spinner-green center-align">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div ng-show="!videoStatusPersonal">
+			<h4 ng-show="!videoStatusPersonal">Not even a video on this list because you either not logined or we have a problem!</h4>
+		</div>
+		<div ng-show="videoStatusPersonal">
+			<h6>Personal Videos</h6>
+			<div class="divider"></div>
+			<div>
+				<div class="col s12 m6 l4 xl3" ng-repeat="videoPersonal in arrayVideosPersonal">
+					<div class="card hoverable">
+						<div class="card-image">
+							<a class="waves-effect waves-block waves-light" href="#!watch?cid={{videoPersonal.id}}"><img src="{{videoPersonal.attributes.thumbnail}}" alt="{{videoPersonal.attributes.name}}"></a>
+							<a class="btn-floating btn-large halfway-fab waves-effect waves-light red" href="#!watch?cid={{videoPersonal.id}}"><i class="material-icons">play_arrow</i></a>
+						</div>
+						<div class="card-content">
+							<a href="#!watch?cid={{videoPersonal.id}}"><span class="card-title-small black-text truncate">{{videoPersonal.attributes.name}}</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="divider"></div>
+	<div class="row" ng-controller="listVideos">
+		<h6>Suggested and Trending Videos</h6>
+		<div class="divider"></div>
+		<div>
+			<div ng-show="loadingPage" class="container center-align offsetVert20">
+				<div class="preloader-wrapper active center-align">
+					<div class="spinner-layer spinner-blue center-align">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div><div class="gap-patch">
+						<div class="circle"></div>
+					</div><div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+					</div>
+
+					<div class="spinner-layer spinner-red center-align">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div><div class="gap-patch">
+						<div class="circle"></div>
+					</div><div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+					</div>
+
+					<div class="spinner-layer spinner-yellow center-align">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div><div class="gap-patch">
+						<div class="circle"></div>
+					</div><div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+					</div>
+
+					<div class="spinner-layer spinner-green center-align">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div><div class="gap-patch">
+						<div class="circle"></div>
+					</div><div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m6 l4 xl3" ng-repeat="video in arrayVideos">
+				<div class="card hoverable">
+					<div class="card-image">
+						<a class="waves-effect waves-block waves-light" href="#!play?id={{video.id.videoId}}"><img src="{{video.snippet.thumbnails.high.url}}" alt="{{video.id.videoId}}"></a>
+						<a class="btn-floating btn-large halfway-fab waves-effect waves-light red" href="#!play?id={{video.id.videoId}}"><i class="material-icons">play_arrow</i></a>
+					</div>
+					<div class="card-content">
+						<a href="#!play?id={{video.id.videoId}}"><span class="card-title-small black-text truncate">{{video.snippet.title}}</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
