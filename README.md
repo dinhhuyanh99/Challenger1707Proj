@@ -23,6 +23,19 @@ TO-DO:
 - FIX PLAYLIST THUMBNAIL SHOWED NULL!
 - FIX LOG IN FAILURE ON SOME DEVICES!
 
+
+
+
+
+Changelog 13/11/2017 21:11:20
+
+- Added Basic Search function
+- Added Splash Screen
+
+
+Minor (annoying) Bug
+- Video playing will alert status of the current video (Currently works as a method to push to Auto Play feature)
+
 © 2017 YouTube, LLC
 © 2017 All Rights Reserved Dinh Huy Anh
 © 2017 Google Open-source APIs
