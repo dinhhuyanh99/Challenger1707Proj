@@ -78,6 +78,26 @@ YTChallengerApp.config(['$routeProvider',function($routeProvider) {
   });
 }]);
 
+YTChallengerApp.controller('searchEngine', function($scope, $http, $sce){
+    $scope.searchVideo = function searchVideo(toSearchFor) {
+        $scope.validSearchString = false;
+        $http({
+            method: 'GET',
+            url: "https://content.googleapis.com/youtube/v3/search?q=" + toSearchFor + "&maxResults=25&part=snippet&key=AIzaSyALTMBX1Ufu_PZqGPd_M2cePFckKxHZXEM"
+        }).then(function successCallBack(response) {
+            $scope.validSearchString = true;
+            $scope.searchResults = response.data.items;
+            $scope.resetSearch = function resetSearch() {
+                $scope.searchString = "";
+                $scope.validSearchString = false;
+            };
+        }, function errorCallBack(response) {
+            Materialize.toast('Oops! Our server is having problem. We are so sorry for such inconvenient!', 5000);
+            console.log(response);
+        });
+    }
+
+});
 YTChallengerApp.controller('listVideosPersonal', function($scope, $http, $sce){
   $scope.videoStatusPersonal= false;
   $scope.loadingPersonal = true;
@@ -91,7 +111,6 @@ YTChallengerApp.controller('listVideosPersonal', function($scope, $http, $sce){
   }).then(function successCallBack(response) {
       $scope.loadingPersonal = false;
     $scope.arrayVideosPersonal = response.data.data;
-    console.log($scope.arrayVideosPersonal);
     if ($scope.arrayVideosPersonal !== undefined) {
       for (var i = 0; i < $scope.arrayVideosPersonal.length; i++) {
         if ($scope.arrayVideosPersonal[i].attributes.thumbnail === "") {
@@ -181,6 +200,7 @@ YTChallengerApp.controller('videoContent', function videoContent($scope, $http, 
     method: 'GET',
     url: 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=AIzaSyALTMBX1Ufu_PZqGPd_M2cePFckKxHZXEM&part=snippet,contentDetails,statistics,status'
   }).then(function successCallBack(response) {
+      onYouTubeIframeAPIReady();
       $scope.loadingPage = false;
       $scope.watchingVideo = response.data.items[0];
       $scope.timeStamp = new Date($scope.watchingVideo.snippet.publishedAt).toLocaleDateString();
@@ -219,6 +239,35 @@ YTChallengerApp.controller('videoContent', function videoContent($scope, $http, 
       });
 
 });
+function onYouTubeIframeAPIReady() {
+    var player = new YT.Player('existed-iframe-player', {
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+function onPlayerReady(event) {
+    alert('Ready to play!');
+}
+function iframeStatus(playerStatus) {
+    if (playerStatus == -1) {
+        alert('Unstarted!'); // unstarted
+    } else if (playerStatus == 0) {
+        alert('Ended!'); // ended
+    } else if (playerStatus == 1) {
+        alert('playing!'); // playing
+    } else if (playerStatus == 2) {
+        alert('paused!'); // paused
+    } else if (playerStatus == 3) {
+        alert('buffering'); // buffering
+    } else if (playerStatus == 5) {
+        alert('video cued'); // video cued
+    }
+}
+function onPlayerStateChange(event) {
+    iframeStatus(event.data);
+}
 
 YTChallengerApp.controller('videoPersonalContent', function videoContent($scope, $http, $location, $sce) {
     var cid = $location.search().cid;

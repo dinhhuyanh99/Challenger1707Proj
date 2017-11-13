@@ -3,6 +3,9 @@
     <head>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
+      <meta http-equiv="cache-control" content="no-cache" />
+      <meta http-equiv="Pragma" content="no-cache" />
+      <meta http-equiv="Expires" content="-1" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <meta charset="UTF-8">
     </head>
@@ -92,17 +95,19 @@
           </div>
         </nav>
       </div>
-
-        <!--<div class="container">-->
-          <!--<form>-->
-            <!--<div class="input-field">-->
-              <!--<i class="material-icons prefix">search</i>-->
-              <!--<input id="search" type="search">-->
-              <!--<label for="search">Search</label>-->
-              <!--<i class="material-icons waves-effect waves-dark waves-ripple">close</i>-->
-            <!--</div>-->
-          <!--</form>-->
-        <!--</div>-->
+        <div class="container" ng-controller="searchEngine">
+          <form>
+            <div class="input-field">
+              <i class="material-icons prefix">search</i>
+              <input id="search" type="search" ng-model="searchString" ng-keyup="searchVideo(searchString);">
+              <label for="search">Search</label>
+              <i class="material-icons waves-effect waves-dark waves-ripple" ng-click="resetSearch();">close</i>
+            </div>
+          </form>
+          <div class="collection" ng-show="validSearchString">
+            <a class="collection-item" ng-repeat="searchQuery in searchResults | limitTo:5:0" href="#!play?id={{searchQuery.id.videoId}}" ng-click="resetSearch();">{{searchQuery.snippet.title}}</a>
+          </div>
+        </div>
 
     <ng-view>
       <div class="container center-align offsetVert20">

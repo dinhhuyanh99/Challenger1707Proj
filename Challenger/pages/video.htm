@@ -60,44 +60,7 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-    var tag = document.createElement('script');
-    tag.id = 'iframe-demo';
-    tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('existed-iframe-player', {
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
-    function onPlayerReady(event) {
-        alert('Ready to play!');
-    }
-    function iframeStatus(playerStatus) {
-        if (playerStatus == -1) {
-            alert('Unstarted!'); // unstarted
-        } else if (playerStatus == 0) {
-            alert('Ended!'); // ended
-        } else if (playerStatus == 1) {
-            alert('playing!'); // playing
-        } else if (playerStatus == 2) {
-            alert('paused!'); // paused
-        } else if (playerStatus == 3) {
-            alert('buffering'); // buffering
-        } else if (playerStatus == 5) {
-            alert('video cued'); // video cued
-        }
-    }
-    function onPlayerStateChange(event) {
-        iframeStatus(event.data);
-    }
-</script>
+<script type="text/javascript" id="iframe-demo" src="https://www.youtube.com/iframe_api"></script>
  <!--  <div class="card horizontal fixed-size-card waves-effect waves-block waves-dark">
 					<div class="card-image">
 						<a class="waves-effect waves-block waves-light" href="#"><img src="https://i.ytimg.com/vi/OLux-Q8Uano/hqdefault.jpg?sqp=-oaymwEWCNIBEHZIWvKriqkDCQgBFQAAiEIYAQ==&rs=AOn4CLBaqn03KXh727N-kQpDu2czLCCeQg"></a>
