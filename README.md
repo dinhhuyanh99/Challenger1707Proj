@@ -8,17 +8,20 @@ Changelog 10/11/2017 10:34:20
 - Change api link to HTTPS format
 - Fixed playlist Delete function, press twice to delete
 - Video Info improved!
+
+
 Bugs:
 - Now playing feature in playlist queue sometimes works sometimes doesn't
 - Suggestions hasn't been filtered -> error in playing video
 - Add video cannot add video with _ (underscore tag)
 
+
 TO-DO:
-IMPROVE REGEX
-INCLUDE AUTO-PLAY FEATURE!
-FIX SUGGESSTIONS!
-FIX PLAYLIST THUMBNAIL SHOWED NULL!
-FIX LOG IN FAILURE ON SOME DEVICES!
+- IMPROVE REGEX
+- INCLUDE AUTO-PLAY FEATURE!
+- FIX SUGGESSTIONS!
+- FIX PLAYLIST THUMBNAIL SHOWED NULL!
+- FIX LOG IN FAILURE ON SOME DEVICES!
 
 © 2017 YouTube, LLC
 © 2017 All Rights Reserved Dinh Huy Anh
